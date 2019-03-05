@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es3",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "baseUrl": "../",
+        "lib": ["es2015"],
+        "paths": {
+            "*": [
+                "node_modules/*",
+                "back/*",
+                "common/*",
+            ]
+        }
+    }
+}
