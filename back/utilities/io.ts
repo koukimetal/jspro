@@ -11,3 +11,10 @@ export const readInput = () : Promise<string> => {
         })
     });
 }
+
+export function* getFoolIterator(allInput: string) {
+    const inputs = allInput.split(/\s+/).filter(str => str.length > 0);
+    for (let i = 0; i < inputs.length; i++) {
+        yield inputs[i];
+    }
+}
