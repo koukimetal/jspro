@@ -40,7 +40,7 @@ module.exports = async () => {
             plugins: [
                 new TsconfigPathsPlugin({ configFile: "./back/tsconfig.json" }),
             ],
-            extensions: ['.tsx', '.ts', '.js', '.json']
+            extensions: ['.ts', '.js']
         }
     });
 };
