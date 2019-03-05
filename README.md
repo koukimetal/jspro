@@ -10,3 +10,5 @@ I like atcoder.
 
 `node dist/[name].js` to run. name would be a (relative path from back/contests).replace(/\//g, '_').replace(/^_|\.ts$/g, '')
 (e.g. node dist/atcoder_abc120_c.js)
+
+`Ctrl + D` would work as EOF
