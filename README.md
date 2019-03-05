@@ -1,10 +1,6 @@
 jspro
 
-I love typescript.
-
-I love webpack.
-
-I love procon.
+I love typescript, webpack and procon.
 
 I like atcoder.
 
