@@ -8,7 +8,10 @@ I like atcoder.
 
 `yarn build` or `npm run watch` to build.
 
-`node dist/[name].js` to run. name would be a (relative path from back/contests).replace(/\//g, '_').replace(/^_|\.ts$/g, '')
-(e.g. node dist/atcoder_abc120_c.js)
+`node dist/<relative path to the file from back/contests >.js` 
 
 `Ctrl + D` would work as EOF
+
+`watch` uses development build which enables you to debug. On vscode, you should be able to debug easily.
+
+`build` uses production build. It helps you submit short code.
