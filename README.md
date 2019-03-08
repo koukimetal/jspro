@@ -1,8 +1,13 @@
 jspro
 
-I love typescript, webpack and procon.
+Environment to use modern Typescript in programming competition.
 
-I like atcoder.
+Example
+
+submission: https://atcoder.jp/contests/abc120/submissions/4481110
+
+source: https://github.com/koukimetal/jspro/blob/master/back/contests/atcoder/abc120/d.ts
+
 
 `yarn watch` or `npm run watch` to watch.
 
@@ -15,7 +20,9 @@ I like atcoder.
 `watch` uses development build which enables you to debug. On vscode, you should be able to debug easily.
 
 https://code.visualstudio.com/docs/getstarted/settings
-https://code.visualstudio.com/docs/getstarted/settings
+
+https://code.visualstudio.com/docs/editor/debugging
+
 Adding following to setting would help you to debug
 ```
     "launch": {
