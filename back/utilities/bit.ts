@@ -1,10 +1,10 @@
 
-type Bit = '0' | '1';
+export type ABit = '0' | '1';
 
 // This file is haven't verified.
 export class BigBit {
-    bit: Array<Bit>;
-    constructor(value: number | string | Array<Bit>) {
+    private bit: Array<ABit>;
+    constructor(value: number | string | Array<ABit>) {
         if (typeof value === "number") {
             this.bit = BigBit.stringToBit(value.toString(2));
         } else if (typeof value === "string") {
@@ -23,12 +23,12 @@ export class BigBit {
         }
     }
 
-    private static isBit(x: string): x is Bit {
+    private static isBit(x: string): x is ABit {
         return x === '0' || x === '1';
     }
 
     private static stringToBit(bit: string) {
-        const result = new Array<Bit>(bit.length);
+        const result = new Array<ABit>(bit.length);
         for (let i = 0; i < bit.length; i++) {
             const a = bit[i];
             if (!BigBit.isBit(a)) {
@@ -36,12 +36,13 @@ export class BigBit {
             }
             result[i] = a;
         }
+        result.reverse();
         return result;
     }
 
-    private static common = (A: BigBit, B: BigBit, operator: (a: Bit, b: Bit) => Bit) => {
+    private static common = (A: BigBit, B: BigBit, operator: (a: ABit, b: ABit) => ABit) => {
         const len = Math.max(A.bit.length, B.bit.length);
-        const result = new Array<Bit>(len);
+        const result = new Array<ABit>(len);
         for (let i = 0; i < len; i++) {
             const a = (i < A.bit.length) ? A.bit[i] : '0';
             const b = (i < B.bit.length) ? B.bit[i] : '0';
@@ -52,15 +53,31 @@ export class BigBit {
     }
 
     or = (bit: BigBit) => {
-        return new BigBit(BigBit.common(bit, this, (a: Bit, b: Bit) => (a === '1' || b === '1') ? '1': '0'));
+        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (a === '1' || b === '1') ? '1': '0'));
     }
 
     and = (bit: BigBit) => {
-        return new BigBit(BigBit.common(bit, this, (a: Bit, b: Bit) => (a === '1' && b === '1') ? '1': '0'));
+        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (a === '1' && b === '1') ? '1': '0'));
     }
 
     xor = (bit: BigBit) => {
-        return new BigBit(BigBit.common(bit, this, (a: Bit, b: Bit) => ((a === '1' && b === '0') || (a === '0' && b === '1')) ? '1': '0'));
+        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => ((a === '1' && b === '0') || (a === '0' && b === '1')) ? '1': '0'));
+    }
+
+    getBit = (index: number) => {
+        return this.bit[index];
+    }
+
+    getHighestZeroIndex = () => {
+        if (this.isZero()) {
+            return -1;
+        } else {
+            return this.bit.length - 1;
+        }
+    }
+
+    isZero = () => {
+        return this.bit.length === 1 && this.bit[0] === '0';
     }
 
     toString = () => {

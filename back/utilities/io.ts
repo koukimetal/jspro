@@ -18,3 +18,9 @@ export function* getFoolIterator(allInput: string) {
         yield inputs[i];
     }
 }
+
+export const getFoolNextInt = async () => {
+    const all = await readInput();
+    const iterator = getFoolIterator(all);
+    return () => parseInt(iterator.next().value);
+}
