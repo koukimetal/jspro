@@ -1,9 +1,8 @@
 import { BigBit, ABit } from 'utilities/bit';
-import { getFoolNextInt } from "utilities/io";
-import { basename } from 'path';
+import { getChottoMashinaNextInt } from "utilities/io";
 
 (async () => {
-    const nextInt = await getFoolNextInt();
+    const nextInt = await getChottoMashinaNextInt();
 
     const N = nextInt();
     const K = new BigBit(nextInt());
@@ -13,7 +12,7 @@ import { basename } from 'path';
         A[i] = new BigBit(nextInt());
     }
 
-    const base: Array<ABit> = ['1'];
+    const base: Array<ABit> = [1];
     const count: Array<{0: number, 1: number}> = [];
     for (let i = 0; i < 41; i++) {
         const bit = new BigBit(base);
@@ -28,7 +27,7 @@ import { basename } from 'path';
         count[i] = {
             0: score[0], 1: score[1]
         };
-        base.unshift('0');
+        base.unshift(0);
     }
 
 
@@ -81,7 +80,7 @@ import { basename } from 'path';
         if (K.getHighestZeroIndex() < i) {
             continue;
         }
-        if (K.getBit(i) === '1') {
+        if (K.getBit(i) === 1) {
             // calc when it's 0
             const idealScore = sum + cacheGetIdeal(i) + (count[i][0] * cachedPow(i));
             max = Math.max(max, idealScore);

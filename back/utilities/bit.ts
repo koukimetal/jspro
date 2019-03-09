@@ -1,5 +1,5 @@
 
-export type ABit = '0' | '1';
+export type ABit = 0 | 1;
 
 // This file is haven't verified.
 export class BigBit {
@@ -14,29 +14,24 @@ export class BigBit {
             }
             this.bit = BigBit.stringToBit(stringBit);
         } else if (Array.isArray(value)) {
-            const lastIndex = value.lastIndexOf('1');
+            const lastIndex = value.lastIndexOf(1);
             if (lastIndex < 0) {
-                this.bit = ['0'];
+                this.bit = [0];
             } else {
                 this.bit = value.slice(0, lastIndex + 1);
             }
         }
     }
 
-    private static isBit(x: string): x is ABit {
-        return x === '0' || x === '1';
-    }
-
-    private static stringToBit(bit: string) {
-        const result = new Array<ABit>(bit.length);
-        for (let i = 0; i < bit.length; i++) {
-            const a = bit[i];
-            if (!BigBit.isBit(a)) {
-                throw Error(bit + " is not bit");
+    private static stringToBit(stringBit: string) {
+        const result = new Array<ABit>(stringBit.length);
+        for (let i = 0; i < stringBit.length; i++) {
+            if (stringBit[i] !== '0' && stringBit[i] !== '1') {
+                throw Error(stringBit + " is not bit");
             }
-            result[i] = a;
+            const bit = stringBit[i] === '0' ? 0 : 1;
+            result[stringBit.length - i - 1] = bit;
         }
-        result.reverse();
         return result;
     }
 
@@ -44,8 +39,8 @@ export class BigBit {
         const len = Math.max(A.bit.length, B.bit.length);
         const result = new Array<ABit>(len);
         for (let i = 0; i < len; i++) {
-            const a = (i < A.bit.length) ? A.bit[i] : '0';
-            const b = (i < B.bit.length) ? B.bit[i] : '0';
+            const a = (i < A.bit.length) ? A.bit[i] : 0;
+            const b = (i < B.bit.length) ? B.bit[i] : 0;
             const c = operator(a, b);
             result[len - i - 1] = c;
         }
@@ -53,15 +48,15 @@ export class BigBit {
     }
 
     or = (bit: BigBit) => {
-        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (a === '1' || b === '1') ? '1': '0'));
+        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (((a | b) as ABit))));
     }
 
     and = (bit: BigBit) => {
-        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (a === '1' && b === '1') ? '1': '0'));
+        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (((a & b) as ABit))));
     }
 
     xor = (bit: BigBit) => {
-        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => ((a === '1' && b === '0') || (a === '0' && b === '1')) ? '1': '0'));
+        return new BigBit(BigBit.common(bit, this, (a: ABit, b: ABit) => (((a ^ b) as ABit))));
     }
 
     getBit = (index: number) => {
@@ -77,7 +72,7 @@ export class BigBit {
     }
 
     isZero = () => {
-        return this.bit.length === 1 && this.bit[0] === '0';
+        return this.bit.length === 1 && this.bit[0] === 0;
     }
 
     toString = () => {
@@ -88,7 +83,7 @@ export class BigBit {
     toNumber = () => {
         let sum = 0;
         for (let i = 0; i < this.bit.length; i++) {
-            if (this.bit[i] === '1') {
+            if (this.bit[i] === 1) {
                 sum += Math.pow(2, i);
             }
         }

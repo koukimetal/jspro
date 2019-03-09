@@ -24,3 +24,32 @@ export const getFoolNextInt = async () => {
     const iterator = getFoolIterator(all);
     return () => parseInt(iterator.next().value);
 }
+
+export const getChottoMashinaNext = async () => {
+    const all = await readInput();
+    const getIterator = function* () {
+        let head = -1;
+        for (let i = 0; i <= all.length; i++) {
+            if (all[i] === ' ' || all[i] === '\n' || i === all.length) {
+                if (head === -1) {
+                    continue;
+                } else {
+                    const res = all.substring(head, i);
+                    head = -1;
+                    yield res;
+                }
+            } else {
+                if (head === -1) {
+                    head = i;
+                }
+            }
+        }
+    }
+    const iterator = getIterator();
+    return () => iterator.next().value;
+}
+
+export const getChottoMashinaNextInt = async () => {
+    const next = await getChottoMashinaNext();
+    return () => parseInt(next());
+}
