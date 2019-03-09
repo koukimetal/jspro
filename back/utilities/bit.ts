@@ -42,7 +42,7 @@ export class BigBit {
             const a = (i < A.bit.length) ? A.bit[i] : 0;
             const b = (i < B.bit.length) ? B.bit[i] : 0;
             const c = operator(a, b);
-            result[len - i - 1] = c;
+            result[i] = c;
         }
         return result;
     }
